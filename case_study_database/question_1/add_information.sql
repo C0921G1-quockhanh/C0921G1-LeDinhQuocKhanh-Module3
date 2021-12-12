@@ -1,7 +1,7 @@
 use furama_resort_management;
 
--- `Position` table
-insert into `Position`
+-- `position` table
+insert into `position`
 values
 (001, 'Receptionist'),
 (002, 'Service Staff'),
@@ -10,24 +10,24 @@ values
 (005, 'Manager'),
 (006, 'President');
 
-select * from `Position`;
+select * from `position`;
 
--- Qualification table
-insert into Qualification
+-- qualification table
+insert into qualification
 values
 (001, 'Intermediate'),
 (002, 'College'),
 (003, 'University'),
 (004, 'Postgraduate');
 
-select * from Qualification;
+select * from qualification;
 
--- Department table
-insert into Department
+-- department table
+insert into department
 values
 (001, 'Sales-Marketing'),
 (002, 'Administration'),
 (003, 'Service'),
 (004, 'Management');
 
-select * from Department;
+select * from department;
