@@ -12,7 +12,7 @@ create table `Order` (
 	OrderID int not null auto_increment primary key,
     CustomerID int not null,
     OrderDate datetime not null,
-    TotalPrice float not null,
+    TotalPrice float,
     
     foreign key(CustomerID)
 		references Customer(CustomerID)
