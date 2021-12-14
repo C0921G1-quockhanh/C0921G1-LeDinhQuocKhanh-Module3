@@ -36,8 +36,13 @@ order by C.customer_id asc;
 
 /* 6.	Hiển thị ma_dich_vu, ten_dich_vu, dien_tich, chi_phi_thue, ten_loai_dich_vu của tất cả các loại 
 dịch vụ chưa từng được khách hàng thực hiện đặt từ quý 1 của năm 2021 (Quý 1 là tháng 1, 2, 3). */
-select Ser.service_id, Ser.service_name, Ser.service_area, Ser.rental_cost, SerT.service_type_name, Contr.contract_id
+select Ser.service_id, Ser.service_name, Ser.service_area, Ser.rental_cost, SerT.service_type_name
 from service Ser
 join service_type SerT on SerT.service_type_id = Ser.service_type_id
 join contract Contr on Ser.service_id = Contr.service_id
-where (quarter(Contr.start_date) = 1 and year(Contr.start_date) = 2021) or (quarter(Contr.end_date) = 1 and year(Contr.end_date) = 2021);
+where Ser.service_id not in (
+	select service_id
+	from contract
+	where (quarter(start_date) = 1 and year(start_date) = 2021) or (quarter(end_date) = 1 and year(end_date) = 2021)
+)
+group by Ser.service_id;
