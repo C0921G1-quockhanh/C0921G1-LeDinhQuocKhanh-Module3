@@ -1,3 +1,5 @@
+drop database if exists furama_resort_management;
+
 create database furama_resort_management;
 
 use furama_resort_management;

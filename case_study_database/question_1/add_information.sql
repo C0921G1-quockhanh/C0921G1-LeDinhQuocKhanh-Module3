@@ -98,12 +98,12 @@ from service_type;
 -- service table
 insert into service
 values
-(001,'Villa Beach Front',25000,10000000,10,3,1,'vip','Có hồ bơi',500,4),
-(002,'House Princess 01',14000,5000000,7,2,2,'vip','Có thêm bếp nướng',null,3),
-(003,'Room Twin 01',5000,1000000,2,4,3,'normal','Có tivi',null,null),
-(004,'Villa No Beach Front',22000,9000000,8,3,1,'normal','Có hồ bơi',300,3),
-(005,'House Princess 02',10000,4000000,5,3,2,'normal','Có thêm bếp nướng',null,2),
-(006,'Room Twin 02',3000,900000,2,4,3,'normal','Có tivi',null,null);
+(001,'Villa Beach Front',25000,1000000,10,3,1,'vip','Có hồ bơi',500,4),
+(002,'House Princess 01',14000,500000,7,2,2,'vip','Có thêm bếp nướng',null,3),
+(003,'Room Twin 01',5000,100000,2,4,3,'normal','Có tivi',null,null),
+(004,'Villa No Beach Front',22000,900000,8,3,1,'normal','Có hồ bơi',300,3),
+(005,'House Princess 02',10000,400000,5,3,2,'normal','Có thêm bếp nướng',null,2),
+(006,'Room Twin 02',3000,90000,2,4,3,'normal','Có tivi',null,null);
 
 select *
 from service;
