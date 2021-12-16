@@ -106,6 +106,13 @@ create table contract (
 		references service(service_id)
 );
 
+alter table contract
+drop foreign key contract_ibfk_2;
+
+alter table contract
+ADD CONSTRAINT contract_customer_fk
+    FOREIGN KEY (customer_id) REFERENCES customer (customer_id) ON DELETE CASCADE;  
+
 create table accompanied_service (
 	accompanied_service_id int primary key,
     accompanied_service_name varchar(45),
@@ -125,3 +132,10 @@ create table detail_contract (
 	foreign key(accompanied_service_id)
 		references accompanied_service(accompanied_service_id)
 );
+
+alter table detail_contract
+drop foreign key detail_contract_ibfk_1;
+
+alter table detail_contract
+ADD CONSTRAINT detail_contract_contract_fk
+    FOREIGN KEY (contract_id) REFERENCES contract (contract_id) ON DELETE CASCADE;  

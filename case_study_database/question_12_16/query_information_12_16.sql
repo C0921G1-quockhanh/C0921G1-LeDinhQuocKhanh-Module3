@@ -53,3 +53,15 @@ having number_of_contract <= 3
 order by E.employee_id;
 
 -- 16.	Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
+set sql_safe_updates = 0;
+
+delete from employee
+where employee_id not in (
+	select employee_id
+	from contract
+	where year(start_date) between 2019 and 2021
+	group by employee_id
+);
+
+select *
+from employee;
