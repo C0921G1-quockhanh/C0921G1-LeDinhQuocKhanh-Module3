@@ -43,6 +43,6 @@ join contract Contr on Ser.service_id = Contr.service_id
 where Ser.service_id not in (
 	select service_id
 	from contract
-	where (quarter(start_date) = 1 and year(start_date) = 2021) or (quarter(end_date) = 1 and year(end_date) = 2021)
+    where not(end_date < str_to_date('January 1 2021','%M %d %Y') or start_date > str_to_date('March 31 2021','%M %d %Y'))
 )
 group by Ser.service_id;
