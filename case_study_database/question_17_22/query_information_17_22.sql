@@ -67,3 +67,18 @@ from employee
 union
 select customer_id, customer_name, email, phone_number, date_of_birth, address
 from customer;
+
+/* 21.	Tạo khung nhìn có tên là v_nhan_vien để lấy được thông tin của tất cả các nhân viên có địa chỉ là “Đà Nẵng” hoặc “Huế” và đã từng lập hợp đồng cho một hoặc
+nhiều khách hàng bất kì với ngày lập hợp đồng là “02/09/2021”. */
+create view view_employee
+as
+select E.employee_id, E.employee_name, E.phone_number, E.email, E.address
+from employee E
+join contract Contr on E.employee_id = Contr.employee_id
+where (E.address like '%Đà Nẵng' or E.address like '%Huế') and Contr.start_date = str_to_date('September 2 2021','%M %d %Y')
+group by E.employee_id;
+
+select *
+from view_employee;
+
+-- 22.	Thông qua khung nhìn v_nhan_vien thực hiện cập nhật địa chỉ thành “Hà Nội” đối với tất cả các nhân viên được nhìn thấy bởi khung nhìn này.
