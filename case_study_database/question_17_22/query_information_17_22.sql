@@ -38,3 +38,32 @@ where customer_id in (
 
 select *
 from customer;
+
+-- 19.	Cập nhật giá cho các dịch vụ đi kèm được sử dụng trên 10 lần trong năm 2020 lên gấp đôi
+set sql_safe_updates = 0;
+
+update accompanied_service
+set price = price * 2
+where accompanied_service_id in (
+	select accompanied_service_id
+    from (
+		select ASer.accompanied_service_id
+		from contract Contr
+		join detail_contract DContr on Contr.contract_id = DContr.contract_id
+		join accompanied_service ASer on ASer.accompanied_service_id = DContr.accompanied_service_id
+		where year(Contr.start_date) = 2020 or year(Contr.end_date) = 2020
+		group by ASer.accompanied_service_id
+		having sum(DContr.quantity) > 10
+    ) as tmp
+);
+
+select *
+from accompanied_service;
+
+/* 20.	Hiển thị thông tin của tất cả các nhân viên và khách hàng có trong hệ thống, thông tin hiển thị bao gồm
+id (ma_nhan_vien, ma_khach_hang),ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi. */
+select employee_id, employee_name, email, phone_number, date_of_birth, address
+from employee
+union
+select customer_id, customer_name, email, phone_number, date_of_birth, address
+from customer;
