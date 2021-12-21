@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+    <style>
+        #menu {
+            background-color: black;
+            height: 30px;
+        }
+
+        #menu li {
+            position: relative;
+            float: left;
+            width: 200px;
+            height: 30px;
+            list-style: none;
+            background-color: black;
+            color: white;
+            padding: 0 20px;
+            line-height: 30px;
+            cursor: pointer;
+        }
+
+        #menu li:hover {
+            color: red;
+        }
+
+        #menu ul ul {
+            position: absolute;
+            left: 0;
+            padding: 0;
+            visibility: hidden;
+        }
+
+        #menu ul li:hover ul {
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <ul>
+            <li>Iphone
+                <ul>
+                    <li>Iphone XS</li>
+                    <li>Iphone 12</li>
+                    <li>Iphone 12 Pro</li>
+                    <li>Iphone 13</li>
+                    <li>Iphone 13 Pro Max</li>
+                </ul>
+            </li>
+            <li>Samsung</li>
+            <li>Xiaomi</li>
+            <li>Huawei</li>
+            <li style="float: right">Login</li>
+        </ul>
+    </div>
+</body>
+</html>

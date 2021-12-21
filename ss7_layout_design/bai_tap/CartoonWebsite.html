@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartoon_Website</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial,sans-serif;
+        }
+
+        .col-1 {width: 8.33%;}
+        .col-2 {width: 16.66%;}
+        .col-3 {width: 25%;}
+        .col-4 {width: 33.33%;}
+        .col-5 {width: 41.66%;}
+        .col-6 {width: 50%;}
+        .col-7 {width: 58.33%;}
+        .col-8 {width: 66.66%;}
+        .col-9 {width: 75%;}
+        .col-10 {width: 83.33%;}
+        .col-11 {width: 91.66%;}
+        .col-12 {width: 100%;}
+
+        [class*="col-"] {
+            float: left;
+            padding: 5px;
+        }
+
+        .row::after {
+            clear: both;
+            display: block;
+            content: "";
+        }
+
+        .header {
+            background-color: lightgrey;
+            font-size: 20pt;
+            font-style: italic;
+        }
+
+        .cartoon_text {
+            background-color: red;
+            color: white;
+        }
+
+        .main_menu {
+            background-color: lightgrey;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .lower_text {
+            font-size: 60%;
+            color: grey;
+        }
+
+        .border_side_menu {
+            border: 3px solid grey;
+            margin-top: 5px;
+        }
+
+        .footer {
+            background-color: lightgrey;
+            margin-top: 5px;
+            text-align: center;
+        }
+
+        @media only screen and (max-width: 768px) {
+            [class*="col-"] {
+                width: 100%;
+            }
+
+            .cartoon_text {
+                background-color: deepskyblue;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <div class="col-12 header">
+            Phim <span class="cartoon_text">Hoạt Hình</span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 main_menu">
+            Phim hoạt hình | Phim hoạt hình yêu thích | Nhân vật hoạt hình | Góp ý
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-4 border_side_menu">
+            <div class="row">
+                <div class="col-12">
+                    <video width="100%" controls>
+                        <source src="../images_videos/mov_bbb.mp4">
+                    </video>
+                    <h4>Big Buck Bunny _ Part 1 - <span class="lower_text">5.147.528 lượt xem</span></h4>
+                    <h4>Cartoon Channel</h4>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <video width="100%" controls>
+                        <source src="../images_videos/mov_bbb.mp4">
+                    </video>
+                    <h4>Big Buck Bunny _ Part 2 - <span class="lower_text">6.214.205 lượt xem</span></h4>
+                    <h4>Cartoon Channel</h4>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <video width="100%" controls>
+                        <source src="../images_videos/mov_bbb.mp4">
+                    </video>
+                    <h4>Big Buck Bunny _ Part 3 - <span class="lower_text">4.214.255 lượt xem</span></h4>
+                    <h4>Cartoon Channel</h4>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <video width="100%" controls>
+                        <source src="../images_videos/mov_bbb.mp4">
+                    </video>
+                    <h4>Big Buck Bunny _ Part 4 - <span class="lower_text">7.554.225 lượt xem</span></h4>
+                    <h4>Cartoon Channel</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-8" style="margin-top: 5px">
+            <div class="row">
+                <div class="col-12">
+                    <video width="100%" controls>
+                        <source src="../images_videos/mov_bbb.mp4">
+                    </video>
+                    <h4>Big Buck Bunny _ Part 5 - <span class="lower_text">5.824.962 lượt xem</span></h4>
+                    <h4 style="color: grey">A recently awoken enormous and utterly adorable fluffy rabbit is heartlessly harassed by a
+                        flying squirrel's gang of rodents who are determined to squash his happiness.</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 footer">
+            <h4>&copy;2021 - Thiết kế web bởi trang Codegym.vn</h4>
+        </div>
+    </div>
+</body>
+</html>

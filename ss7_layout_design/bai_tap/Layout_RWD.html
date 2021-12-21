@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Layout_RWD</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Verdana,sans-serif;
+        }
+
+        .col-1 {width: 8.33%;}
+        .col-2 {width: 16.66%;}
+        .col-3 {width: 25%;}
+        .col-4 {width: 33.33%;}
+        .col-5 {width: 41.66%;}
+        .col-6 {width: 50%;}
+        .col-7 {width: 58.33%;}
+        .col-8 {width: 66.66%;}
+        .col-9 {width: 75%;}
+        .col-10 {width: 83.33%;}
+        .col-11 {width: 91.66%;}
+        .col-12 {width: 100%;}
+
+        [class*="col-"] {
+            float: left;
+            padding: 5px;
+        }
+
+        .row::after {
+            clear: both;
+            display: block;
+            content: "";
+        }
+
+        .column_header {
+            color: white;
+            text-align: center;
+            font-size: 20pt;
+        }
+
+        .aside_1 {
+            text-align: center;
+            color: blueviolet;
+            margin-top: 20px;
+        }
+
+        .border_dotted {
+            border: 2px dotted;
+            border-color: white white black white;
+        }
+
+        .aside_2 {
+            border: 2px solid grey;
+            text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .footer {
+            background-color: darkslategrey;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="row" style="background-color: darkslategrey">
+        <div class="col-1 column_header">Logo</div>
+        <div class="col-1 column_header">Home</div>
+        <div class="col-1 column_header">About</div>
+        <div class="col-1 column_header">Projects</div>
+        <div class="col-1 column_header">Contact</div>
+        <div class="col-6 column_header"></div>
+        <div class="col-1 column_header">&#9998;Login</div>
+    </div>
+
+    <div class="row">
+        <div class="col-2" style="background-color: lightgrey">
+            <div class="row">
+                <div class="col-12 aside_1">Link</div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 aside_1">Link</div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 aside_1">Link</div>
+            </div>
+        </div>
+
+        <div class="col-8">
+            <div class="row">
+                <div class="col-12 border_dotted">
+                    <h3>Cristiano Ronaldo</h3>
+                    <p>Born and raised in Madeira, Ronaldo began his senior club career playing for Sporting CP, before signing with Manchester United in 2003,
+                        aged 18, winning the FA Cup in his first season. He would also go onto win three consecutive Premier League titles, the Champions League
+                        and the FIFA Club World Cup; at age 23, he won his first Ballon d'Or. Ronaldo was the subject of the then-most expensive association football
+                        transfer when he signed for Real Madrid in 2009 in a transfer worth €94 million (£80 million), where he won 15 trophies, including two La Liga
+                        titles, two Copa del Rey and four Champions Leagues, and became the club's all-time top goalscorer. He and won back-to-back Ballons d'Or in 2013
+                        and 2014, and again in 2016 and 2017, and was runner-up three times behind Lionel Messi, his perceived career rival. In 2018, he signed for
+                        Juventus in a transfer worth an initial €100 million (£88 million), the most expensive transfer for an Italian club and the most expensive
+                        transfer for a player over 30 years old. He won two Serie A titles, two Supercoppe Italiana and a Coppa Italia, before returning to Manchester
+                        United in 2021.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <h3>Test</h3>
+                    <p>One of the world's most marketable and famous athletes, Ronaldo was ranked the world's highest-paid athlete by Forbes in 2016 and 2017 and
+                        the world's most famous athlete by ESPN from 2016 to 2019. Time included him on their list of the 100 most influential people in the world
+                        in 2014. He is the first footballer and the third sportsman to earn US$1 billion in his career.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="row">
+                <div class="col-12 aside_2">ADS</div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 aside_2">ADS</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 footer">
+            <h4>Footer Text</h4>
+        </div>
+    </div>
+</body>
+</html>

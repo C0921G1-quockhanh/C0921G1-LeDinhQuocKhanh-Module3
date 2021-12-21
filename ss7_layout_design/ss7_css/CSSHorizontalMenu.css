@@ -2,7 +2,7 @@ body {
     font-family: Arial;
 }
 
-#menu {
+#main_menu {
     height: 30px;
     padding: 0;
     margin: 0;
@@ -10,12 +10,12 @@ body {
     border: 1px solid #CDCDCD;
 }
 
-#menu ul, #menu li {
+#main_menu ul, #main_menu li {
     padding: 0;
     margin: 0;
 }
 
-#menu li {
+#main_menu li {
     position: relative;
     float: left;
     list-style: none;
@@ -23,7 +23,7 @@ body {
     padding: 0;
 }
 
-#menu li a {
+#main_menu li a {
     width: 100px;
     height: 30px;
     display: block;
@@ -34,24 +34,24 @@ body {
     color: white;
 }
 
-#menu ul ul li a {
+#main_menu ul ul li a {
     width: 200px;
     text-align: left;
     padding-left: 10px;
 }
 
-#menu li a:hover {
+#main_menu li a:hover {
     background-color: red;
 }
 
-#menu ul ul {
+#main_menu ul ul {
     position: absolute;
     top: 30px;
     left: 15px;
     visibility: hidden;
 }
 
-#menu ul li:hover ul {
+#main_menu ul li:hover ul {
     visibility: visible;
 }
 

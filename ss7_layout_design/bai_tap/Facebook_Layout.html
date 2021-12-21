@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Facebook_Layout</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Verdana,sans-serif;
+        }
+
+        .col-1 {width: 8.33%;}
+        .col-2 {width: 16.66%;}
+        .col-3 {width: 25%;}
+        .col-4 {width: 33.33%;}
+        .col-5 {width: 41.66%;}
+        .col-6 {width: 50%;}
+        .col-7 {width: 58.33%;}
+        .col-8 {width: 66.66%;}
+        .col-9 {width: 75%;}
+        .col-10 {width: 83.33%;}
+        .col-11 {width: 91.66%;}
+        .col-12 {width: 100%;}
+
+        [class*="col-"] {
+            float: left;
+            padding: 5px;
+        }
+
+        .row::after {
+            clear: both;
+            display: block;
+            content: "";
+        }
+
+        .search_information {
+            border: 2px solid grey;
+            width: 200px;
+            height: 100px;
+            border-radius: 70px/50px;
+            padding: 5px 30px;
+            margin-left: 20px;
+        }
+
+        .icon {
+            text-align: center;
+        }
+
+        .text {
+            margin-left: 20px;
+        }
+
+        .distance_bottom {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="row">
+        <div class="col-2">
+            <div class="col-12">
+                <i class="fa fa-facebook" style="font-size: 50px"></i>
+                <span class="search_information">Search on Facebook</span>
+            </div>
+        </div>
+
+        <div class="col-5">
+            <div class="col-3 icon">
+                <i class="fa fa-home" style="font-size: 50px"></i>
+            </div>
+
+            <div class="col-3 icon">
+                <i class="fa fa-music" style="font-size: 50px"></i>
+            </div>
+
+            <div class="col-3 icon">
+                <i class="fa fa-gamepad" style="font-size: 50px"></i>
+            </div>
+
+            <div class="col-3 icon">
+                <i class="fa fa-users" style="font-size: 50px"></i>
+            </div>
+        </div>
+
+        <div class="col-5">
+            <div class="col-3 icon">
+                <i class="fa fa-user" style="font-size: 50px"></i>
+            </div>
+
+            <div class="col-3 icon">
+                <i class="fa fa-comment" style="font-size: 50px"></i>
+            </div>
+
+            <div class="col-3 icon">
+                <i class="fa fa-bell" style="font-size: 50px"></i>
+            </div>
+
+            <div class="col-3 icon">
+                <i class="fa fa-angle-down" style="font-size: 50px"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-2">
+            <div class="row distance_bottom">
+                <div class="col-12">
+                    <i class="fa fa-user" style="font-size: 50px"></i>
+                    <span class="text">Le Dinh Quoc Khanh</span>
+                </div>
+            </div>
+
+            <div class="row distance_bottom">
+                <div class="col-12">
+                    <i class="fa fa-users" style="font-size: 50px"></i>
+                    <span class="text">Friends</span>
+                </div>
+            </div>
+
+            <div class="row distance_bottom">
+                <div class="col-12">
+                    <i class="fa fa-briefcase" style="font-size: 50px"></i>
+                    <span class="text">Jobs</span>
+                </div>
+            </div>
+
+            <div class="row distance_bottom">
+                <div class="col-12">
+                    <i class="fa fa-calendar" style="font-size: 50px"></i>
+                    <span class="text">Calendar</span>
+                </div>
+            </div>
+
+            <div class="row distance_bottom">
+                <div class="col-12">
+                    <i class="fa fa-pencil" style="font-size: 50px"></i>
+                    <span class="text">Daily Note</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-5">
+            <div class="row">
+                <div class="col-3 icon">
+                    <i class="fa fa-image" style="font-size: 100px"></i>
+                </div>
+
+                <div class="col-3 icon">
+                    <i class="fa fa-image" style="font-size: 100px"></i>
+                </div>
+
+                <div class="col-3 icon">
+                    <i class="fa fa-image" style="font-size: 100px"></i>
+                </div>
+
+                <div class="col-3 icon">
+                    <i class="fa fa-image" style="font-size: 100px"></i>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <h3>Facebook News</h3>
+                    <p>Giữa loạt tin đồn, 1 người thân thiết trong nghề khẳng định "Sơn Tùng chính là siêu sao", tiết lộ cả "con người thật" của Hải Tú ngoài đời</p>
+                    <h3>NeymarJR đã cập nhật ảnh đại diện của anh ấy.</h3>
+                    <img src="../images_videos/neymar.jpeg" width="100%" alt="NeymarJR">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-5">
+            <div class="row" style="margin-top: 100px">
+                <div class="col-4"></div>
+                <div class="col-4" style="font-weight: bold">Người liên hệ</div>
+                <div class="col-2">
+                    <i class="fa fa-search" style="font-size: 20px"></i>
+                </div>
+                <div class="col-2">
+                    <i class="fa fa-camera" style="font-size: 20px"></i>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-8">
+                    <p>Duc Hung</p>
+                    <p>Bui Lam Quang Ngoc</p>
+                    <p>Van An</p>
+                    <p>Group bong da va tinh ban</p>
+                    <p>Cristiano Ronaldo</p>
+                    <p>Lionel Messi</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

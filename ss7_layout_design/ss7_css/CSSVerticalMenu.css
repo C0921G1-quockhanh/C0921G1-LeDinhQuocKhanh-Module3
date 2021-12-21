@@ -2,12 +2,12 @@ body {
     font-family: Arial;
 }
 
-#menu, #menu ul, #menu li {
+#main_menu, #main_menu ul, #main_menu li {
     padding: 0;
     margin: 0;
 }
 
-#menu li {
+#main_menu li {
     list-style: none;
     position: relative;
     width: 100px; height: 30px;
@@ -17,22 +17,22 @@ body {
     cursor: pointer;
 }
 
-#menu li a {
+#main_menu li a {
     text-decoration: none;
     color: white;
 }
 
-#menu li:hover {
+#main_menu li:hover {
     background-color: red;
 }
 
-#menu ul ul {
+#main_menu ul ul {
     position: absolute;
     top: 0;
     left: 140px;
     visibility: hidden;
 }
 
-#menu ul li:hover ul {
+#main_menu ul li:hover ul {
     visibility: visible;
 }
