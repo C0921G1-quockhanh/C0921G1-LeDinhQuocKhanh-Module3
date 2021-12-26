@@ -33,12 +33,10 @@
                     <c:out value="${customer.address}"/>
                 </td>
                 <td>
-                    <img src="<c:url value="${customer.image}"/>" alt="footballer_image">
+                    <img src="<c:out value="${customer.image}"/>" width="100px" height="100px" alt="footballer_image">
                 </td>
             </tr>
         </c:forEach>
     </table>
-
-    <img src="resources/img/ronaldo.jpg" alt="picture">
 </body>
 </html>
