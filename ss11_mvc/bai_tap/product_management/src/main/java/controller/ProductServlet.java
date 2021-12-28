@@ -121,7 +121,7 @@ public class ProductServlet extends HttpServlet {
         else {
             request.setAttribute("product",selectedProduct);
             request.setAttribute("message_view_by_name","Selected product was displayed");
-            dispatcher = request.getRequestDispatcher("viewByName.jsp");
+            dispatcher = request.getRequestDispatcher("product/viewByName.jsp");
         }
 
         try {
