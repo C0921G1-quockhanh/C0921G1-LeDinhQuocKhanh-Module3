@@ -2,7 +2,9 @@ package repository;
 
 import bean.User;
 
+import java.math.BigDecimal;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,84 @@ public class UserRepository implements IUserRepository {
     private static final String ORDER_BY_NAME_SQL = "select * from users\n" + "order by name";
     private static final String GET_USER_SP = "{call get_user_by_id(?)}";
     private static final String INSERT_USER_SP = "{call insert_user(?,?,?)}";
+    private static final String SQL_INSERT = "insert into employee(name,salary,created_date)\n" + "values(?,?,?)";
+    private static final String SQL_UPDATE = "update employee\n" + "set salary = ?\n" + "where name = ?";
+    private static final String SQL_CREATE_TABLE = "create table employee"
+            + "("
+            + "id serial,"
+            + "name varchar(100) not null,"
+            + "salary numeric(15,2) not null,"
+            + "created_date timestamp,"
+            + "primary key(id)"
+            + ")";
+    private static final String SQL_DROP_TABLE = "drop table if exists employee";
+
+    @Override
+    public void insertUpdateUseTransaction() {
+        try {
+            Connection connection = BaseRepository.connection;
+            Statement statement = connection.createStatement();
+            PreparedStatement psInsert = connection.prepareStatement(SQL_INSERT);
+            PreparedStatement psUpdate = connection.prepareStatement(SQL_UPDATE);
+
+            statement.execute(SQL_DROP_TABLE);
+            statement.execute(SQL_CREATE_TABLE);
+
+            connection.setAutoCommit(false);
+
+            psInsert.setString(1,"Quynh");
+            psInsert.setBigDecimal(2,new BigDecimal(10));
+            psInsert.setTimestamp(3,Timestamp.valueOf(LocalDateTime.now()));
+            psInsert.execute();
+
+            psInsert.setString(1,"Ngan");
+            psInsert.setBigDecimal(2,new BigDecimal(20));
+            psInsert.setTimestamp(3,Timestamp.valueOf(LocalDateTime.now()));
+            psInsert.execute();
+
+            psUpdate.setBigDecimal(1,new BigDecimal(999.99));
+            psUpdate.setString(2,"Quynh");
+            psUpdate.execute();
+
+            connection.commit();
+
+            connection.setAutoCommit(true);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void insertUpdateWithoutTransaction() {
+        try {
+            Connection connection = BaseRepository.connection;
+            Statement statement = connection.createStatement();
+            PreparedStatement psInsert = connection.prepareStatement(SQL_INSERT);
+            PreparedStatement psUpdate = connection.prepareStatement(SQL_UPDATE);
+
+            statement.execute(SQL_DROP_TABLE);
+            statement.execute(SQL_CREATE_TABLE);
+
+            psInsert.setString(1,"Quynh");
+            psInsert.setBigDecimal(2,new BigDecimal(10));
+            psInsert.setTimestamp(3,Timestamp.valueOf(LocalDateTime.now()));
+            psInsert.execute();
+
+            psInsert.setString(1,"Ngan");
+            psInsert.setBigDecimal(2,new BigDecimal(20));
+            psInsert.setTimestamp(3,Timestamp.valueOf(LocalDateTime.now()));
+            psInsert.execute();
+
+            psUpdate.setBigDecimal(2,new BigDecimal(999.99));
+            psUpdate.setString(2,"Quynh");
+            psUpdate.execute();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void insertUser(User user) throws SQLException {
@@ -165,6 +245,72 @@ public class UserRepository implements IUserRepository {
         }
         catch (SQLException e) {
             printSQLException(e);
+        }
+    }
+
+    @Override
+    public void addUserTransaction(User user, int[] permissions) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        PreparedStatement preparedStatementAssignment = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = BaseRepository.connection;
+            connection.setAutoCommit(false);
+
+            preparedStatement = connection.prepareStatement(INSERT_USERS_SQL,Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1,user.getName());
+            preparedStatement.setString(2,user.getEmail());
+            preparedStatement.setString(3,user.getCountry());
+
+            int rowAffected = preparedStatement.executeUpdate();
+            resultSet = preparedStatement.getGeneratedKeys();
+            int userId = 0;
+            if (resultSet.next())
+                userId = resultSet.getInt(1);
+
+            if (rowAffected == 1) {
+                String sqlPivot = "insert into user_permission(permision_id,user_id)\n" + "values(?,?)";
+                preparedStatementAssignment = connection.prepareStatement(sqlPivot);
+
+                for (int permissionId: permissions) {
+                    preparedStatementAssignment.setInt(1,permissionId);
+                    preparedStatementAssignment.setInt(2,userId);
+                    preparedStatementAssignment.executeUpdate();
+                }
+
+                connection.commit();
+            } else {
+                connection.rollback();
+            }
+        }
+        catch (SQLException ex) {
+            try {
+                if (connection != null)
+                    connection.rollback();
+            }
+            catch (SQLException e){
+                System.out.println(e.getMessage());
+            }
+
+            System.out.println(ex.getMessage());
+        }
+
+        finally {
+            try {
+                if (resultSet != null)
+                    resultSet.close();
+                if (preparedStatement != null)
+                    preparedStatement.close();
+                if (preparedStatementAssignment != null)
+                    preparedStatementAssignment.close();
+                if (connection != null)
+                    connection.close();
+            }
+            catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 

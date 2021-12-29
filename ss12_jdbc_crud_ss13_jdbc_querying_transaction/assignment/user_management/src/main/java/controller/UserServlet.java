@@ -74,6 +74,18 @@ public class UserServlet extends HttpServlet {
                     orderByName(request,response);
                     break;
 
+                case "permission":
+                    addUserPermission(request,response);
+                    break;
+
+                case "test-without-tran":
+                    testWithoutTran(request,response);
+                    break;
+
+                case "test-use-tran":
+                    testUseTran(request,response);
+                    break;
+
                 default:
                     listUser(request,response);
             }
@@ -81,6 +93,20 @@ public class UserServlet extends HttpServlet {
         catch (SQLException ex) {
             throw new ServletException(ex);
         }
+    }
+
+    private void testUseTran(HttpServletRequest request,HttpServletResponse response) {
+        this.iUserService.insertUpdateUseTransaction();
+    }
+
+    private void testWithoutTran(HttpServletRequest request,HttpServletResponse response) {
+        this.iUserService.insertUpdateWithoutTransaction();
+    }
+
+    private void addUserPermission(HttpServletRequest request,HttpServletResponse response) {
+        User user = new User("quan","quan.nguyen@codegym.vn","Viet Nam");
+        int[] permissions = {1,2,4};
+        this.iUserService.addUserTransaction(user,permissions);
     }
 
     private void showFindUserForm(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException {
