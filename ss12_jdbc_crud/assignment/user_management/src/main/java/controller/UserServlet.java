@@ -122,7 +122,8 @@ public class UserServlet extends HttpServlet {
         String country = request.getParameter("country");
 
         User newUser = new User(name,email,country);
-        this.iUserService.insertUser(newUser);
+//        this.iUserService.insertUser(newUser);
+        this.iUserService.insertUserStore(newUser);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/create.jsp");
         dispatcher.forward(request,response);
@@ -130,7 +131,8 @@ public class UserServlet extends HttpServlet {
 
     private void showEditForm(HttpServletRequest request,HttpServletResponse response) throws SQLException, IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
-        User existingUser = this.iUserService.selectUser(id);
+//        User existingUser = this.iUserService.selectUser(id);
+        User existingUser = this.iUserService.getUserByID(id);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/edit.jsp");
         request.setAttribute("existingUser",existingUser);

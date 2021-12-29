@@ -45,4 +45,14 @@ public class UserService implements IUserService {
     public List<User> orderByName() {
         return this.iUserRepository.orderByName();
     }
+
+    @Override
+    public User getUserByID(int id) {
+        return this.iUserRepository.getUserByID(id);
+    }
+
+    @Override
+    public void insertUserStore(User user) throws SQLException {
+        this.iUserRepository.insertUserStore(user);
+    }
 }

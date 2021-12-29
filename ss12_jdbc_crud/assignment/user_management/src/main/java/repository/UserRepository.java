@@ -2,9 +2,7 @@ package repository;
 
 import bean.User;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +14,8 @@ public class UserRepository implements IUserRepository {
     private static final String UPDATE_USERS_SQL = "update users\n" + "set name = ?, email = ?, country = ?\n" + "where id = ?";
     private static final String FIND_USERS_COUNTRY_SQL = "select * from users\n" + "where country = ?";
     private static final String ORDER_BY_NAME_SQL = "select * from users\n" + "order by name";
+    private static final String GET_USER_SP = "{call get_user_by_id(?)}";
+    private static final String INSERT_USER_SP = "{call insert_user(?,?,?)}";
 
     @Override
     public void insertUser(User user) throws SQLException {
@@ -96,7 +96,8 @@ public class UserRepository implements IUserRepository {
 
                 users.add(new User(id,name,email,country));
             }
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             printSQLException(e);
         }
 
@@ -125,6 +126,46 @@ public class UserRepository implements IUserRepository {
         }
 
         return users;
+    }
+
+    @Override
+    public User getUserByID(int id) {
+        User user = null;
+
+        try {
+            Connection connection = BaseRepository.connection;
+            CallableStatement callableStatement = connection.prepareCall(GET_USER_SP);
+            callableStatement.setInt(1,id);
+
+            ResultSet resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String country = resultSet.getString("country");
+                user = new User(id,name,email,country);
+            }
+        }
+        catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        return user;
+    }
+
+    @Override
+    public void insertUserStore(User user) throws SQLException {
+        try {
+            Connection connection = BaseRepository.connection;
+            CallableStatement callableStatement = connection.prepareCall(INSERT_USER_SP);
+            callableStatement.setString(1,user.getName());
+            callableStatement.setString(2,user.getEmail());
+            callableStatement.setString(3,user.getCountry());
+
+            callableStatement.executeUpdate();
+        }
+        catch (SQLException e) {
+            printSQLException(e);
+        }
     }
 
     @Override

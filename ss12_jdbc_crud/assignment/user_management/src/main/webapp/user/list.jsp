@@ -18,7 +18,7 @@
             <a href="/users?action=create">Add new user: </a>
         </h2>
         <h2>
-            <a href="/users?action=find_by_country">Find user by country: </a>
+            <a href="/users?action=find_by_country">Find users by country: </a>
         </h2>
         <h2>
             <a href="/users?action=order_by">Order by name: </a>
