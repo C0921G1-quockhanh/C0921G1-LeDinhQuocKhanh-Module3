@@ -29,6 +29,9 @@ public class UserRepository implements IUserRepository {
             + "primary key(id)"
             + ")";
     private static final String SQL_DROP_TABLE = "drop table if exists employee";
+    private static final String SELECT_ALL_USERS_SP = "{call display_all_users}";
+    private static final String UPDATE_USERS_SQL_SP = "{call update_user(?,?,?,?)}";
+    private static final String DELETE_USERS_SQL_SP = "{call delete_user(?)}";
 
     @Override
     public void insertUpdateUseTransaction() {
@@ -143,6 +146,31 @@ public class UserRepository implements IUserRepository {
             PreparedStatement preparedStatement = BaseRepository.connection.prepareStatement(SELECT_ALL_USERS);
 
             ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String country = resultSet.getString("country");
+
+                users.add(new User(id,name,email,country));
+            }
+        }
+        catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        return users;
+    }
+
+    @Override
+    public List<User> selectAllUsersSP() {
+        List<User> users = new ArrayList<>();
+
+        try {
+            Connection connection = BaseRepository.connection;
+            CallableStatement callableStatement = connection.prepareCall(SELECT_ALL_USERS_SP);
+
+            ResultSet resultSet = callableStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
@@ -332,6 +360,24 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
+    public boolean deleteUserSP(int id) throws SQLException {
+        boolean rowDeleted = false;
+
+        try {
+            Connection connection = BaseRepository.connection;
+            CallableStatement callableStatement = connection.prepareCall(DELETE_USERS_SQL_SP);
+            callableStatement.setInt(1,id);
+
+            rowDeleted = callableStatement.executeUpdate() > 0;
+        }
+        catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        return rowDeleted;
+    }
+
+    @Override
     public boolean updateUser(User user) throws SQLException {
         boolean rowUpdated = false;
 
@@ -352,7 +398,27 @@ public class UserRepository implements IUserRepository {
         return rowUpdated;
     }
 
+    @Override
+    public boolean updateUserSP(User user) throws SQLException {
+        boolean rowUpdated = false;
 
+        try {
+            Connection connection = BaseRepository.connection;
+            CallableStatement callableStatement = connection.prepareCall(UPDATE_USERS_SQL_SP);
+
+            callableStatement.setString(1,user.getName());
+            callableStatement.setString(2,user.getEmail());
+            callableStatement.setString(3,user.getCountry());
+            callableStatement.setInt(4,user.getId());
+
+            rowUpdated = callableStatement.executeUpdate() > 0;
+        }
+        catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        return rowUpdated;
+    }
 
     private void printSQLException(SQLException ex) {
         for (Throwable e : ex) {

@@ -71,3 +71,45 @@ from user_permission;
 select *
 from employee;
 
+DELIMITER //
+
+create procedure display_all_users()
+begin
+	select *
+    from users;
+end //
+
+DELIMITER ;
+
+call display_all_users();
+
+DELIMITER //
+
+create procedure update_user(in user_name varchar(50), in user_email varchar(50), in user_country varchar(50), in user_id int)
+begin
+	update users
+    set `name` = user_name, email = user_email, country = user_country
+    where id = user_id;
+end//
+
+DELIMITER ;
+
+DELIMITER //
+
+create procedure delete_user(in user_id int)
+begin
+	delete from users
+    where id = user_id;
+end //
+
+DELIMITER ;
+
+alter table user_permission
+drop foreign key user_permission_ibfk_2;
+
+alter table user_permission
+add constraint user_permission_user_fk
+foreign key (user_id) references users(id) on delete cascade;
+
+select *
+from users;

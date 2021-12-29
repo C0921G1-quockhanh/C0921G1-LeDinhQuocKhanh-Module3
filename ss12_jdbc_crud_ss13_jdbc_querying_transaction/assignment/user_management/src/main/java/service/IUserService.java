@@ -29,4 +29,10 @@ public interface IUserService {
     public void insertUpdateWithoutTransaction();
 
     public void insertUpdateUseTransaction();
+
+    public List<User> selectAllUsersSP();
+
+    public boolean updateUserSP(User user) throws SQLException;
+
+    public boolean deleteUserSP(int id) throws SQLException;
 }

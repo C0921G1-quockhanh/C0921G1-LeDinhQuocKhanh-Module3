@@ -70,4 +70,19 @@ public class UserService implements IUserService {
     public void insertUpdateUseTransaction() {
         this.iUserRepository.insertUpdateUseTransaction();
     }
+
+    @Override
+    public List<User> selectAllUsersSP() {
+        return this.iUserRepository.selectAllUsersSP();
+    }
+
+    @Override
+    public boolean updateUserSP(User user) throws SQLException {
+        return this.iUserRepository.updateUserSP(user);
+    }
+
+    @Override
+    public boolean deleteUserSP(int id) throws SQLException {
+        return this.iUserRepository.deleteUserSP(id);
+    }
 }

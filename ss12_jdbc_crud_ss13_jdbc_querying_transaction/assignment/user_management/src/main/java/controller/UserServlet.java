@@ -131,7 +131,8 @@ public class UserServlet extends HttpServlet {
     }
 
     private void listUser(HttpServletRequest request,HttpServletResponse response) throws SQLException, IOException, ServletException {
-        List<User> users = this.iUserService.selectAllUsers();
+//        List<User> users = this.iUserService.selectAllUsers();
+        List<User> users = this.iUserService.selectAllUsersSP();
         request.setAttribute("users",users);
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/list.jsp");
         dispatcher.forward(request,response);
@@ -172,7 +173,8 @@ public class UserServlet extends HttpServlet {
         String country = request.getParameter("country");
 
         User updatedUser = new User(id,name,email,country);
-        this.iUserService.updateUser(updatedUser);
+//        this.iUserService.updateUser(updatedUser);
+        this.iUserService.updateUserSP(updatedUser);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/edit.jsp");
         dispatcher.forward(request,response);
@@ -180,7 +182,8 @@ public class UserServlet extends HttpServlet {
 
     private void deleteUser(HttpServletRequest request,HttpServletResponse response) throws SQLException, IOException, ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
-        this.iUserService.deleteUser(id);
+//        this.iUserService.deleteUser(id);
+        this.iUserService.deleteUserSP(id);
 
         List<User> users = this.iUserService.selectAllUsers();
         request.setAttribute("users",users);
