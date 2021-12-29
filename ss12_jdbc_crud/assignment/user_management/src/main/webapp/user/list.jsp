@@ -20,6 +20,9 @@
         <h2>
             <a href="/users?action=find_by_country">Find user by country: </a>
         </h2>
+        <h2>
+            <a href="/users?action=order_by">Order by name: </a>
+        </h2>
     </div>
 
     <div align="center">

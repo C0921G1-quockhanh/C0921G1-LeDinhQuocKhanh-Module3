@@ -15,6 +15,7 @@ public class UserRepository implements IUserRepository {
     private static final String DELETE_USERS_SQL = "delete from users\n" + "where id = ?";
     private static final String UPDATE_USERS_SQL = "update users\n" + "set name = ?, email = ?, country = ?\n" + "where id = ?";
     private static final String FIND_USERS_COUNTRY_SQL = "select * from users\n" + "where country = ?";
+    private static final String ORDER_BY_NAME_SQL = "select * from users\n" + "order by name";
 
     @Override
     public void insertUser(User user) throws SQLException {
@@ -96,6 +97,30 @@ public class UserRepository implements IUserRepository {
                 users.add(new User(id,name,email,country));
             }
         } catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        return users;
+    }
+
+    @Override
+    public List<User> orderByName() {
+        List<User> users = new ArrayList<>();
+
+        try {
+            PreparedStatement preparedStatement = BaseRepository.connection.prepareStatement(ORDER_BY_NAME_SQL);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String country = resultSet.getString("country");
+
+                users.add(new User(id,name,email,country));
+            }
+        }
+        catch (SQLException e) {
             printSQLException(e);
         }
 

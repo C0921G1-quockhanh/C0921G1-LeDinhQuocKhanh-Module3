@@ -40,4 +40,9 @@ public class UserService implements IUserService {
     public List<User> findUserByCountry(String existingCountry) {
         return this.iUserRepository.findUserByCountry(existingCountry);
     }
+
+    @Override
+    public List<User> orderByName() {
+        return this.iUserRepository.orderByName();
+    }
 }

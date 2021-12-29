@@ -70,6 +70,10 @@ public class UserServlet extends HttpServlet {
                     showFindUserForm(request,response);
                     break;
 
+                case "order_by":
+                    orderByName(request,response);
+                    break;
+
                 default:
                     listUser(request,response);
             }
@@ -90,6 +94,13 @@ public class UserServlet extends HttpServlet {
 
         request.setAttribute("users",users);
         RequestDispatcher dispatcher = request.getRequestDispatcher("user/find_by_country.jsp");
+        dispatcher.forward(request,response);
+    }
+
+    private void orderByName(HttpServletRequest request,HttpServletResponse response) throws SQLException, IOException, ServletException {
+        List<User> users = this.iUserService.orderByName();
+        request.setAttribute("users",users);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/order_by_name.jsp");
         dispatcher.forward(request,response);
     }
 
