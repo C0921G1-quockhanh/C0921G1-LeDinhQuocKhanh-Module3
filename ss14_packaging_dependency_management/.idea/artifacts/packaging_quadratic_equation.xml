@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="packaging_quadratic_equation">
+    <output-path>$PROJECT_DIR$/out/artifacts/packaging_quadratic_equation</output-path>
+    <root id="archive" name="ss14_packaging_dependency_management.jar">
+      <element id="module-output" name="ss14_packaging_dependency_management" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/out/artifacts/packaging_calculator/ss14_packaging_dependency_management.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

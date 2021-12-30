@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ss14_packaging_dependency_management1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/packaging_quadratic_equation/ss14_packaging_dependency_management.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

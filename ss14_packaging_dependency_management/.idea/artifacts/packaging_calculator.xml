@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="packaging_calculator">
+    <output-path>$PROJECT_DIR$/out/artifacts/packaging_calculator</output-path>
+    <root id="archive" name="ss14_packaging_dependency_management.jar">
+      <element id="module-output" name="ss14_packaging_dependency_management" />
+    </root>
+  </artifact>
+</component>
