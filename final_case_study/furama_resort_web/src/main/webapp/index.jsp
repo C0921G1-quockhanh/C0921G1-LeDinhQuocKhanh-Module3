@@ -44,7 +44,7 @@
                                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                           <li class="nav-item fw-bold">
-                                            <a class="nav-link text-dark" href="#">Home</a>
+                                            <a class="nav-link text-dark" href="">Home</a>
                                           </li>
 
                                           <li class="nav-item fw-bold ms-4">
@@ -52,7 +52,7 @@
                                           </li>
 
                                           <li class="nav-item fw-bold ms-4">
-                                            <a class="nav-link text-dark" href="#">Customer</a>
+                                            <a class="nav-link text-dark" href="/customers">Customer</a>
                                           </li>
 
                                           <li class="nav-item fw-bold ms-4">
@@ -80,7 +80,7 @@
 
       <div class="container-fluid mt-3" style="height: 600px">
           <div class="row h-100">
-              <div class="col-xl-2 border-end border-dark">
+              <div class="col-xl-1 border-end border-dark">
                   <div class="row">
                       <div class="col-xl-12">
                           <ul class="list-group list-group-flush">
@@ -93,7 +93,9 @@
                   </div>
               </div>
 
-              <div class="col-xl-10"></div>
+              <div class="col-xl-11">
+
+              </div>
           </div>
       </div>
 

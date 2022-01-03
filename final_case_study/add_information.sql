@@ -154,3 +154,23 @@ values
 
 select *
 from detail_contract;
+
+insert into customer(customer_type_id,customer_name,date_of_birth,sex,identity_number,phone_number,email,address)
+values
+(5,'Nguyễn Thị Hào','1970-11-07',0,'643431213','0945423362','thihao07@gmail.com','23 Nguyễn Hoàng, Đà Nẵng');
+
+select *
+from customer
+where customer_id = 2;
+
+delete from customer
+where customer_id = 11;
+
+select C.customer_id,CT.customer_type_id, CT.customer_type_name, C.customer_name, C.date_of_birth, C.sex, C.identity_number, C.phone_number, C.email, C.address
+from customer C
+join customer_type CT on C.customer_type_id = CT.customer_type_id
+where C.customer_id = 2
+order by C.customer_id;
+
+select *
+from customer;
