@@ -62,6 +62,7 @@ public class CustomerServlet extends HttpServlet {
                     break;
 
                 case "delete":
+                    deleteCustomer(request,response);
                     break;
 
                 default:
@@ -156,5 +157,15 @@ public class CustomerServlet extends HttpServlet {
         catch (ParseException e) {
             e.printStackTrace();
         }
+    }
+
+    private void deleteCustomer(HttpServletRequest request,HttpServletResponse response) throws SQLException, IOException, ServletException {
+        int customerID = Integer.parseInt(request.getParameter("id"));
+        this.iCustomerService.deleteCustomer(customerID);
+
+        List<Customer> customers = this.iCustomerService.selectAllCustomers();
+        request.setAttribute("customers",customers);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("customer/list.jsp");
+        dispatcher.forward(request,response);
     }
 }

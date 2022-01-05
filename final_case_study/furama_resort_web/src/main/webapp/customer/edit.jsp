@@ -44,11 +44,11 @@
                                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                         <li class="nav-item fw-bold">
-                                            <a class="nav-link text-dark" href="">Home</a>
+                                            <a class="nav-link text-dark" href="/">Home</a>
                                         </li>
 
                                         <li class="nav-item fw-bold ms-4">
-                                            <a class="nav-link text-dark" href="#">Employee</a>
+                                            <a class="nav-link text-dark" href="/employees">Employee</a>
                                         </li>
 
                                         <li class="nav-item fw-bold ms-4">
@@ -56,11 +56,11 @@
                                         </li>
 
                                         <li class="nav-item fw-bold ms-4">
-                                            <a class="nav-link text-dark" href="#">Service</a>
+                                            <a class="nav-link text-dark" href="/services">Service</a>
                                         </li>
 
                                         <li class="nav-item fw-bold ms-4">
-                                            <a class="nav-link text-dark" href="#">Contract</a>
+                                            <a class="nav-link text-dark" href="/contracts">Contract</a>
                                         </li>
                                     </ul>
 
@@ -110,11 +110,11 @@
 
                                 <select class="form-select" aria-label="default select example" id="customerTypeID" name="customerTypeID">
                                     <option></option>
-                                    <option value="1">Diamond</option>
-                                    <option value="2">Platinum</option>
-                                    <option value="3">Gold</option>
-                                    <option value="4">Silver</option>
-                                    <option value="5">Member</option>
+                                    <option value="1" ${existingCustomer.customerType.customerTypeID == 1 ? 'selected' : ''}>Diamond</option>
+                                    <option value="2" ${existingCustomer.customerType.customerTypeID == 2 ? 'selected' : ''}>Platinum</option>
+                                    <option value="3" ${existingCustomer.customerType.customerTypeID == 3 ? 'selected' : ''}>Gold</option>
+                                    <option value="4" ${existingCustomer.customerType.customerTypeID == 4 ? 'selected' : ''}>Silver</option>
+                                    <option value="5" ${existingCustomer.customerType.customerTypeID == 5 ? 'selected' : ''}>Member</option>
                                 </select>
                             </div>
 
@@ -132,8 +132,8 @@
                                 <label for="sex" class="form-label">Sex: </label>
                                 <select class="form-select" aria-label="default select example" id="sex" name="sex">
                                     <option></option>
-                                    <option value="true">Male</option>
-                                    <option value="false">Female</option>
+                                    <option value="true" ${existingCustomer.sex == true ? 'selected' : ''}>Male</option>
+                                    <option value="false" ${existingCustomer.sex == false ? 'selected' : ''}>Female</option>
                                 </select>
                             </div>
 

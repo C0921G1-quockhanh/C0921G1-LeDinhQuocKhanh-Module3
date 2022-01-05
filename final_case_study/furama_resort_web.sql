@@ -18,8 +18,28 @@ create table department (
     department_name varchar(45)
 );
 
+create table `user` (
+	username varchar(255) primary key,
+    `password` varchar(255)
+);
+
+create table `role` (
+	role_id int primary key,
+    role_name varchar(255)
+);
+
+create table user_role (
+	role_id int,
+    username varchar(255),
+    
+    foreign key(role_id)
+		references `role`(role_id),
+	foreign key(username)
+		references `user`(username)
+);
+
 create table employee (
-	employee_id int primary key,
+	employee_id int auto_increment primary key,
     employee_name varchar(45),
     date_of_birth date,
     identity_number varchar(45),
@@ -30,13 +50,16 @@ create table employee (
     position_id int,
     qualification_id int,
     department_id int,
+    username varchar(255),
     
     foreign key(position_id)
 		references `position`(position_id),
     foreign key(qualification_id)
 		references qualification(qualification_id),
 	foreign key(department_id)
-		references department(department_id)
+		references department(department_id),
+	foreign key(username)
+		references `user`(username)
 );
 
 create table customer_type (
@@ -45,7 +68,7 @@ create table customer_type (
 );
 
 create table customer (
-	customer_id int primary key,
+	customer_id int auto_increment primary key,
     customer_type_id int,
     customer_name varchar(45),
     date_of_birth date,
@@ -70,7 +93,7 @@ create table service_type (
 );
 
 create table service (
-	service_id int primary key,
+	service_id int auto_increment primary key,
     service_name varchar(45),
     service_area int,
     rental_cost double,
@@ -89,7 +112,7 @@ create table service (
 );
 
 create table contract (
-	contract_id int primary key,
+	contract_id int auto_increment primary key,
     start_date datetime,
     end_date datetime,
     deposit double,

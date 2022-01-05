@@ -16,6 +16,10 @@ public class Customer {
     public Customer() {
     }
 
+    public Customer(int customerID) {
+        this.customerID = customerID;
+    }
+
     public Customer(CustomerType customerType, String customerName, Date dateOfBirth, boolean sex, String identityNumber, String phoneNumber, String email, String address) {
         this.customerType = customerType;
         this.customerName = customerName;

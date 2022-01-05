@@ -28,19 +28,35 @@ values
 
 select * from department;
 
+insert into `user`
+values
+('An@codegym','123456'),
+('Binh@codegym','123456'),
+('Yen@codegym','123456'),
+('Toan@codegym','123456'),
+('Phat@codegym','123456'),
+('Nghi@codegym','123456'),
+('Ha@codegym','123456'),
+('Dong@codegym','123456'),
+('Hoang@codegym','123456'),
+('Dao@codegym','123456');
+
+select *
+from `user`;
+
 -- employee table
 insert into employee
 values
-(001,'Nguyễn Văn An','1970-11-07','456231786',10000000,'0901234121','annguyen@gmail.com','295 Nguyễn Tất Thành, Đà Nẵng',1,3,1,null),
-(002,'Lê Văn Bình','1997-04-09','654231234',7000000,'0934212314','binhlv@gmail.com','22 Yên Bái, Đà Nẵng',1,2,2,null),
-(003,'Hồ Thị Yến','1995-12-12','999231723',14000000,'0412352315','thiyen@gmail.com','K234/11 Điện Biên Phủ, Gia Lai',1,3,2,null),
-(004,'Võ Công Toản','1980-04-04','123231365',17000000,'0374443232','toan0404@gmail.com','277 Hoàng Diệu, Quảng Trị',1,4,4,null),
-(005,'Nguyễn Bỉnh Phát','1999-12-09','454363232',6000000,'0902341231','phatphat@gmail.com','243 Yên Bái, Đà Nẵng',2,1,1,null),
-(006,'Khúc Nguyễn An Nghi','2000-11-08','964542311',7000000,'0978653213','annghi20@gmail.com','294 Nguyễn Tất Thành, Đà Nẵng',2,2,3,null),
-(007,'Nguyễn Hữu Hà','1993-01-01','534323231',8000000,'0941234553','nhh0101@gmail.com','4 Nguyễn Chí Thanh, Huế',2,3,2,null),
-(008,'Nguyễn Hà Đông','1989-09-03','234414123',9000000,'0642123111','donghanguyen@gmail.com','111 Hùng Vương, Hà Nội',2,4,4,null),
-(009,'Tòng Hoang','1982-09-03','256781231',6000000,'0245144444','hoangtong@gmail.com','213 Hàm Nghi, Đà Nẵng',2,4,4,null),
-(0010,'Nguyễn Công Đạo','1994-01-08','755434343',8000000,'0988767111','nguyencongdao12@gmail.com','6 Hoà Khánh, Đồng Nai',2,3,2,null);
+(001,'Nguyễn Văn An','1970-11-07','456231786',10000000,'0901234121','annguyen@gmail.com','295 Nguyễn Tất Thành, Đà Nẵng',1,3,1,'An@codegym'),
+(002,'Lê Văn Bình','1997-04-09','654231234',7000000,'0934212314','binhlv@gmail.com','22 Yên Bái, Đà Nẵng',1,2,2,'Binh@codegym'),
+(003,'Hồ Thị Yến','1995-12-12','999231723',14000000,'0412352315','thiyen@gmail.com','K234/11 Điện Biên Phủ, Gia Lai',1,3,2,'Yen@codegym'),
+(004,'Võ Công Toản','1980-04-04','123231365',17000000,'0374443232','toan0404@gmail.com','277 Hoàng Diệu, Quảng Trị',1,4,4,'Toan@codegym'),
+(005,'Nguyễn Bỉnh Phát','1999-12-09','454363232',6000000,'0902341231','phatphat@gmail.com','243 Yên Bái, Đà Nẵng',2,1,1,'Phat@codegym'),
+(006,'Khúc Nguyễn An Nghi','2000-11-08','964542311',7000000,'0978653213','annghi20@gmail.com','294 Nguyễn Tất Thành, Đà Nẵng',2,2,3,'Nghi@codegym'),
+(007,'Nguyễn Hữu Hà','1993-01-01','534323231',8000000,'0941234553','nhh0101@gmail.com','4 Nguyễn Chí Thanh, Huế',2,3,2,'Ha@codegym'),
+(008,'Nguyễn Hà Đông','1989-09-03','234414123',9000000,'0642123111','donghanguyen@gmail.com','111 Hùng Vương, Hà Nội',2,4,4,'Dong@codegym'),
+(009,'Tòng Hoang','1982-09-03','256781231',6000000,'0245144444','hoangtong@gmail.com','213 Hàm Nghi, Đà Nẵng',2,4,4,'Hoang@codegym'),
+(0010,'Nguyễn Công Đạo','1994-01-08','755434343',8000000,'0988767111','nguyencongdao12@gmail.com','6 Hoà Khánh, Đồng Nai',2,3,2,'Dao@codegym');
 
 select *
 from employee;
@@ -155,22 +171,62 @@ values
 select *
 from detail_contract;
 
-insert into customer(customer_type_id,customer_name,date_of_birth,sex,identity_number,phone_number,email,address)
+-- insert into customer(customer_type_id,customer_name,date_of_birth,sex,identity_number,phone_number,email,address)
+-- values
+-- (5,'Nguyễn Thị Hào','1970-11-07',0,'643431213','0945423362','thihao07@gmail.com','23 Nguyễn Hoàng, Đà Nẵng');
+
+-- select *
+-- from customer
+-- where customer_id = 2;
+
+-- delete from customer
+-- where customer_id = 11;
+
+-- select C.customer_id,CT.customer_type_id, CT.customer_type_name, C.customer_name, C.date_of_birth, C.sex, C.identity_number, C.phone_number, C.email, C.address
+-- from customer C
+-- join customer_type CT on C.customer_type_id = CT.customer_type_id
+-- where C.customer_id = 2
+-- order by C.customer_id;
+
+-- select *
+-- from service;
+
+-- insert into service(service_name,service_area,rental_cost,max_people,rental_type_id,service_type_id,room_standard,extra_amenity,pool_area,levels)
+-- values
+-- ('Khanh Villa',15000,800000,6,3,1,'vip','co ho boi',500,4);
+
+-- insert into employee(employee_name,date_of_birth,identity_number,salary,phone_number,email,address,position_id,qualification_id,department_id,username)
+-- values
+-- ('Phạm Xuân Diệu','1997-09-02','456231786','10000000','0988767111','xuandieu92@gmail.com','22 Yên Bái, Đà Nẵng',1,2,2,null);
+
+-- select *
+-- from employee;
+
+-- select E.employee_id,E.employee_name,E.date_of_birth,E.identity_number,E.salary,E.phone_number,E.email,E.address,P.position_name,Q.qualification_name,D.department_name,E.username
+-- from employee E
+-- join `position` P on P.position_id = E.position_id
+-- join qualification Q on Q.qualification_id = E.qualification_id
+-- join department D on D.department_id = E.department_id
+-- where E.employee_id = 3;
+
+-- delete from employee
+-- where employee_id = 11;
+
+insert into `user`
 values
-(5,'Nguyễn Thị Hào','1970-11-07',0,'643431213','0945423362','thihao07@gmail.com','23 Nguyễn Hoàng, Đà Nẵng');
+('Khanh@codegym','123456');
+
+-- select *
+-- from contract;
+
+-- select contract_id,start_date,end_date,deposit,employee_id,customer_id,service_id
+-- from contract;
+
+-- select accompanied_service_id,accompanied_service_name,price,unit,`status`
+-- from accompanied_service;
+
+-- select *
+-- from detail_contract;
 
 select *
-from customer
-where customer_id = 2;
-
-delete from customer
-where customer_id = 11;
-
-select C.customer_id,CT.customer_type_id, CT.customer_type_name, C.customer_name, C.date_of_birth, C.sex, C.identity_number, C.phone_number, C.email, C.address
-from customer C
-join customer_type CT on C.customer_type_id = CT.customer_type_id
-where C.customer_id = 2
-order by C.customer_id;
-
-select *
-from customer;
+from detail_contract;

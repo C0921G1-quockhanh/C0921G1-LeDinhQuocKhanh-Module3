@@ -44,11 +44,11 @@
                                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                                           <li class="nav-item fw-bold">
-                                            <a class="nav-link text-dark" href="">Home</a>
+                                            <a class="nav-link text-dark" href="/">Home</a>
                                           </li>
 
                                           <li class="nav-item fw-bold ms-4">
-                                              <a class="nav-link text-dark" href="#">Employee</a>
+                                              <a class="nav-link text-dark" href="/employees">Employee</a>
                                           </li>
 
                                           <li class="nav-item fw-bold ms-4">
@@ -56,11 +56,11 @@
                                           </li>
 
                                           <li class="nav-item fw-bold ms-4">
-                                            <a class="nav-link text-dark" href="#">Service</a>
+                                            <a class="nav-link text-dark" href="/services">Service</a>
                                           </li>
 
                                           <li class="nav-item fw-bold ms-4">
-                                            <a class="nav-link text-dark" href="#">Contract</a>
+                                            <a class="nav-link text-dark" href="/contracts">Contract</a>
                                           </li>
                                       </ul>
 
