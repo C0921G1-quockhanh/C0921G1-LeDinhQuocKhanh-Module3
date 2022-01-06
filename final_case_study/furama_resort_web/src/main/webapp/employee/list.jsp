@@ -11,6 +11,10 @@
 <head>
     <title>Furama_Resort_Management</title>
     <link rel="stylesheet" href="../css_bootstrap/css/bootstrap.min.css">
+
+<%--    <link rel="stylesheet" href="bootstrap413/css/bootstrap.min.css"/>--%>
+<%--    <link rel="stylesheet" href="datatables/css/dataTables.bootstrap4.min.css"/>--%>
+
 </head>
 <body>
     <div class="container-fluid">
@@ -64,8 +68,8 @@
                                         </li>
                                     </ul>
 
-                                    <form class="d-flex position-absolute top-50 end-0 translate-middle-y">
-                                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                    <form class="d-flex position-absolute top-50 end-0 translate-middle-y" method="post" action="/employees?action=search">
+                                        <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="search" id="search">
                                         <button class="btn btn-outline-success text-dark" type="submit">Search</button>
                                     </form>
                                 </div>
@@ -166,7 +170,8 @@
                                     </td>
 
                                     <td>
-                                        <a href="/employees?action=delete&id=${employee.employeeID}" class="text-dark text-decoration-none">Delete</a>
+                                        <a href="/employees?action=delete&id=${employee.employeeID}" onclick="return confirm('Are you sure to delete the employee whose' +
+                                                ' the name is ${employee.employeeName} and the ID is ${employee.employeeID} ?')" class="text-dark text-decoration-none">Delete</a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -190,5 +195,19 @@
 
 
     <script src="../css_bootstrap/js/bootstrap.min.js"></script>
+
+<%--    <script src="jquery/jquery-3.5.1.min.js"></script>--%>
+<%--    <script src="datatables/js/jquery.dataTables.min.js"></script>--%>
+<%--    <script src="datatables/js/dataTables.bootstrap4.min.js"></script>--%>
+
+<%--    <script>--%>
+<%--        $(document).ready(function () {--%>
+<%--            $('#tableEmployee').dataTable({--%>
+<%--                "dom": 'lrtip',--%>
+<%--                "lengthChange": false,--%>
+<%--                "pageLength": 5--%>
+<%--            });--%>
+<%--        });--%>
+<%--    </script>--%>
 </body>
 </html>

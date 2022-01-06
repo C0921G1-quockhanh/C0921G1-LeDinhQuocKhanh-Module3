@@ -94,7 +94,11 @@
               </div>
 
               <div class="col-xl-11">
+                  <div class="row">
+                      <div class="col-xl-12">
 
+                      </div>
+                  </div>
               </div>
           </div>
       </div>

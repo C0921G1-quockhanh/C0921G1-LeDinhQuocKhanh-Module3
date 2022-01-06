@@ -4,6 +4,7 @@ import bean.Customer;
 import bean.CustomerType;
 import service.customer.CustomerService;
 import service.customer.ICustomerService;
+import validation.Validate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -37,6 +38,10 @@ public class CustomerServlet extends HttpServlet {
 
                 case "edit":
                     updateCustomer(request,response);
+                    break;
+
+                case "search":
+                    searchCustomer(request,response);
                     break;
             }
         }
@@ -74,6 +79,15 @@ public class CustomerServlet extends HttpServlet {
         }
     }
 
+    private void searchCustomer(HttpServletRequest request,HttpServletResponse response) throws SQLException, IOException, ServletException {
+        String element = request.getParameter("search");
+        List<Customer> customers = this.iCustomerService.searchCustomerByElement(element);
+
+        request.setAttribute("customers",customers);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("customer/search.jsp");
+        dispatcher.forward(request,response);
+    }
+
     private void listCustomer(HttpServletRequest request,HttpServletResponse response) throws SQLException, IOException, ServletException {
         List<Customer> customers = this.iCustomerService.selectAllCustomers();
         request.setAttribute("customers",customers);
@@ -88,29 +102,59 @@ public class CustomerServlet extends HttpServlet {
 
     private void insertCustomer(HttpServletRequest request,HttpServletResponse response) throws SQLException, IOException, ServletException {
         try {
+            boolean warningSign = false;
+
             int customerTypeID = Integer.parseInt(request.getParameter("customerTypeID"));
             CustomerType customerType = new CustomerType(customerTypeID);
 
             String customerName = request.getParameter("customerName");
 
+            //Validate Date Of Birth
             String dateString = request.getParameter("dateOfBirth");
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date parsed = format.parse(dateString);
-            Date dateOfBirth = new Date(parsed.getTime());
+            request.setAttribute("dateString",dateString);
+            Date dateOfBirth = null;
+
+            if (Validate.regexDateOfBirth(dateString)) {
+                request.setAttribute("birthdayWarningMsg","Date of Birth is invalid!");
+                warningSign = true;
+            }else {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date parsed = format.parse(dateString);
+                dateOfBirth = new Date(parsed.getTime());
+            }
 
             String sexString = request.getParameter("sex");
             boolean sex = Boolean.parseBoolean(sexString);
 
             String identityNumber = request.getParameter("identityNumber");
+            if (!Validate.regexIdentityNumber(identityNumber)) {
+                request.setAttribute("identityNumberWarningMsg","Identity number is invalid!");
+                warningSign = true;
+            }
+
             String phoneNumber = request.getParameter("phoneNumber");
+            if (!Validate.regexPhoneNumber(phoneNumber)) {
+                request.setAttribute("phoneNumberWarningMsg","Phone number is invalid!");
+                warningSign = true;
+            }
+
             String email = request.getParameter("email");
+            if (!Validate.regexEmail(email)) {
+                request.setAttribute("emailWarningMsg","Email is invalid!");
+                warningSign = true;
+            }
+
             String address = request.getParameter("address");
 
             Customer newCustomer = new Customer(customerType,customerName,dateOfBirth,sex,identityNumber,phoneNumber,email,address);
-            this.iCustomerService.insertCustomer(newCustomer);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("customer/create.jsp");
-            dispatcher.forward(request,response);
+            if (warningSign) {
+                request.setAttribute("customer",newCustomer);
+                showNewForm(request,response);
+            } else {
+                this.iCustomerService.insertCustomer(newCustomer);
+                response.sendRedirect("/customers");
+            }
         }
         catch (ParseException e) {
             e.printStackTrace();

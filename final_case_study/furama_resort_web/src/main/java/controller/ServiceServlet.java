@@ -4,6 +4,7 @@ import bean.RentalType;
 import bean.ServiceType;
 import service.service.IService;
 import service.service.Service;
+import validation.Validate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -69,9 +70,23 @@ public class ServiceServlet extends HttpServlet {
     }
 
     private void insertService(HttpServletRequest request,HttpServletResponse response) throws SQLException, IOException, ServletException {
+        boolean warningSign = false;
+
         String serviceName = request.getParameter("serviceName");
-        int serviceArea = Integer.parseInt(request.getParameter("serviceArea"));
+
+        String areaStr = request.getParameter("serviceArea");
+        if (!Validate.regexPositiveInteger(areaStr)) {
+            request.setAttribute("serviceAreaWarningMsg","Service area is invalid!");
+            warningSign = true;
+        }
+        int serviceArea = Integer.parseInt(areaStr);
+
         double rentalCost = Double.parseDouble(request.getParameter("rentalCost"));
+        if (!Validate.isPositive(rentalCost)) {
+            request.setAttribute("rentalCostWarningMsg","Rental cost is invalid!");
+            warningSign = true;
+        }
+
         int maxPeople = Integer.parseInt(request.getParameter("maxPeople"));
 
         int rentalTypeID = Integer.parseInt(request.getParameter("rentalTypeID"));
@@ -82,13 +97,28 @@ public class ServiceServlet extends HttpServlet {
 
         String roomStandard = request.getParameter("roomStandard");
         String extraAmenity = request.getParameter("extraAmenity");
+
         double poolArea = Double.parseDouble(request.getParameter("poolArea"));
-        int levels = Integer.parseInt(request.getParameter("levels"));
+        if (!Validate.isPositive(poolArea)) {
+            request.setAttribute("poolAreaWarningMsg","Pool area is invalid!");
+            warningSign = true;
+        }
+
+        String levelStr = request.getParameter("levels");
+        if (!Validate.regexPositiveInteger(levelStr)) {
+            request.setAttribute("levelWarningMsg","Levels is invalid!");
+            warningSign = true;
+        }
+        int levels = Integer.parseInt(levelStr);
 
         bean.Service service = new bean.Service(serviceName,serviceArea,rentalCost,maxPeople,rentalType,serviceType,roomStandard,extraAmenity,poolArea,levels);
-        this.iService.insertService(service);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("service/create.jsp");
-        dispatcher.forward(request,response);
+        if (warningSign) {
+            request.setAttribute("service",service);
+            showNewForm(request,response);
+        } else {
+            this.iService.insertService(service);
+            response.sendRedirect("/services");
+        }
     }
 }

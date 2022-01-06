@@ -8,6 +8,7 @@ import service.customer.ICustomerService;
 import service.employee.EmployeeService;
 import service.employee.IEmployeeService;
 import service.service.IService;
+import validation.Validate;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -95,17 +96,40 @@ public class ContractServlet extends HttpServlet {
     private void insertContract(HttpServletRequest request,HttpServletResponse response) throws SQLException, IOException, ServletException {
 
         try {
+            boolean warningSign = false;
+
             String startString = request.getParameter("startDate");
-            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date parsed1 = format1.parse(startString);
-            Date startDate = new Date(parsed1.getTime());
+            request.setAttribute("startString",startString);
+            Date startDate = null;
+
+            if (!Validate.regexTime(startString)) {
+                request.setAttribute("startDateWarningMsg","Start date is invalid!");
+                warningSign = true;
+            } else {
+                SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date parsed1 = format1.parse(startString);
+                startDate = new Date(parsed1.getTime());
+            }
 
             String endString = request.getParameter("endDate");
-            SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date parsed2 = format2.parse(endString);
-            Date endDate = new Date(parsed2.getTime());
+            request.setAttribute("endString",endString);
+            Date endDate = null;
+
+            if (!Validate.regexTime(endString)) {
+                request.setAttribute("endDateWarningMsg","End date is invalid!");
+                warningSign = true;
+            } else {
+
+                SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date parsed2 = format2.parse(endString);
+                endDate = new Date(parsed2.getTime());
+            }
 
             double deposit = Double.parseDouble(request.getParameter("deposit"));
+            if (!Validate.isPositive(deposit)) {
+                request.setAttribute("depositWarningMsg","Deposit is invalid!");
+                warningSign = true;
+            }
 
             int employeeID = Integer.parseInt(request.getParameter("employeeID"));
             Employee employee = new Employee(employeeID);
@@ -117,10 +141,14 @@ public class ContractServlet extends HttpServlet {
             Service service = new Service(serviceID);
 
             Contract newContract = new Contract(startDate,endDate,deposit,employee,customer,service);
-            this.iContractService.insertContract(newContract);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("contract/create.jsp");
-            dispatcher.forward(request,response);
+            if (warningSign) {
+                request.setAttribute("contract",newContract);
+                showNewForm(request,response);
+            } else {
+                this.iContractService.insertContract(newContract);
+                response.sendRedirect("/contracts");
+            }
         }
         catch (ParseException e) {
             e.printStackTrace();

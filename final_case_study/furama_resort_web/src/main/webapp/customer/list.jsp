@@ -65,8 +65,8 @@
                                         </li>
                                     </ul>
 
-                                    <form class="d-flex position-absolute top-50 end-0 translate-middle-y">
-                                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                                    <form class="d-flex position-absolute top-50 end-0 translate-middle-y" method="post" action="/customers?action=search">
+                                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
                                         <button class="btn btn-outline-success text-dark" type="submit">Search</button>
                                     </form>
                                 </div>
@@ -168,7 +168,8 @@
                                             <a href="/customers?action=edit&id=${customer.customerID}" class="text-dark text-decoration-none">Edit</a>
                                         </td>
                                         <td>
-                                            <a href="/customers?action=delete&id=${customer.customerID}" class="text-dark text-decoration-none">Delete</a>
+                                            <a href="/customers?action=delete&id=${customer.customerID}" onclick="return confirm('Are you sure to delete the customer ' +
+                                                    'whose the name is ${customer.customerName} and the ID is ${customer.customerID} ?')" class="text-dark text-decoration-none">Delete</a>
                                         </td>
                                     </tr>
                                 </c:forEach>

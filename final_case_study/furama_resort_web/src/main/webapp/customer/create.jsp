@@ -105,51 +105,75 @@
 
                                 <select class="form-select" aria-label="default select example" id="customerTypeID" name="customerTypeID">
                                     <option></option>
-                                    <option value="1">Diamond</option>
-                                    <option value="2">Platinum</option>
-                                    <option value="3">Gold</option>
-                                    <option value="4">Silver</option>
-                                    <option value="5">Member</option>
+                                    <option value="1" ${customer.customerType.customerTypeID == 1 ? 'selected' : ''}>Diamond</option>
+                                    <option value="2" ${customer.customerType.customerTypeID == 2 ? 'selected' : ''}>Platinum</option>
+                                    <option value="3" ${customer.customerType.customerTypeID == 3 ? 'selected' : ''}>Gold</option>
+                                    <option value="4" ${customer.customerType.customerTypeID == 4 ? 'selected' : ''}>Silver</option>
+                                    <option value="5" ${customer.customerType.customerTypeID == 5 ? 'selected' : ''}>Member</option>
                                 </select>
                             </div>
 
                             <div class="mb-3">
                                 <label for="customerName" class="form-label">Customer Name: </label>
-                                <input type="text" class="form-control" id="customerName" name="customerName">
+                                <input type="text" class="form-control" id="customerName" name="customerName" value="<c:out value="${customer.customerName}"/>">
                             </div>
 
                             <div class="mb-3">
                                 <label for="dateOfBirth" class="form-label">Date Of Birth: </label>
-                                <input type="text" class="form-control" id="dateOfBirth" name="dateOfBirth">
+                                <input type="text" class="form-control" id="dateOfBirth" name="dateOfBirth" placeholder="yyyy-MM-dd" value="<c:out value="${dateString}"/>">
+
+                                <c:if test="${birthdayWarningMsg != null}">
+                                    <p class="text-danger fw-bold">
+                                        <c:out value="${birthdayWarningMsg}"/>
+                                    </p>
+                                </c:if>
                             </div>
 
                             <div class="mb-3">
                                 <label for="sex" class="form-label">Sex: </label>
                                 <select class="form-select" aria-label="default select example" id="sex" name="sex">
                                     <option></option>
-                                    <option value="true">Male</option>
-                                    <option value="false">Female</option>
+                                    <option value="true" ${customer.sex == true ? 'selected' : ''}>Male</option>
+                                    <option value="false" ${customer.sex == false ? 'selected' : ''}>Female</option>
                                 </select>
                             </div>
 
                             <div class="mb-3">
                                 <label for="identityNumber" class="form-label">Identity Number: </label>
-                                <input type="text" class="form-control" id="identityNumber" name="identityNumber">
+                                <input type="text" class="form-control" id="identityNumber" name="identityNumber" value="<c:out value="${customer.identityNumber}"/>">
+
+                                <c:if test="${identityNumberWarningMsg != null}">
+                                    <p class="text-danger fw-bold">
+                                        <c:out value="${identityNumberWarningMsg}"/>
+                                    </p>
+                                </c:if>
                             </div>
 
                             <div class="mb-3">
                                 <label for="phoneNumber" class="form-label">Phone Number: </label>
-                                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
+                                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="<c:out value="${customer.phoneNumber}"/>">
+
+                                <c:if test="${phoneNumberWarningMsg != null}">
+                                    <p class="text-danger fw-bold">
+                                        <c:out value="${phoneNumberWarningMsg}"/>
+                                    </p>
+                                </c:if>
                             </div>
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email: </label>
-                                <input type="text" class="form-control" id="email" name="email">
+                                <input type="text" class="form-control" id="email" name="email" value="<c:out value="${customer.email}"/>">
+
+                                <c:if test="${emailWarningMsg != null}">
+                                    <p class="text-danger fw-bold">
+                                        <c:out value="${emailWarningMsg}"/>
+                                    </p>
+                                </c:if>
                             </div>
 
                             <div class="mb-3">
                                 <label for="address" class="form-label">Address: </label>
-                                <input type="text" class="form-control" id="address" name="address">
+                                <input type="text" class="form-control" id="address" name="address" value="<c:out value="${customer.address}"/>">
                             </div>
 
                             <button type="submit" class="btn btn-secondary">Add New Customer</button>

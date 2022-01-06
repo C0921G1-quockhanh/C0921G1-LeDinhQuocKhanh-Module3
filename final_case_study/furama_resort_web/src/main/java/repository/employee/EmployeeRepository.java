@@ -35,6 +35,14 @@ public class EmployeeRepository implements IEmployeeRepository {
                                                     "set employee_name = ?, date_of_birth = ?, identity_number = ?, salary = ?, phone_number = ?, email = ?, address = ?, position_id = ?, qualification_id = ?, department_id = ?, username = ?\n" +
                                                     "where employee_id = ?";
 
+    private static final String SEARCH_EMPLOYEE_BY_ELEMENT = "select E.employee_id,E.employee_name,E.date_of_birth,E.identity_number,E.salary,E.phone_number,E.email,E.address,P.position_name,Q.qualification_name,D.department_name,E.username\n" +
+                                                    "from employee E\n" +
+                                                    "join `position` P on P.position_id = E.position_id\n" +
+                                                    "join qualification Q on Q.qualification_id = E.qualification_id\n" +
+                                                    "join department D on D.department_id = E.department_id\n" +
+                                                    "where E.employee_name like concat('%',?,'%')\n" +
+                                                    "order by E.employee_id";
+
     @Override
     public void insertEmployee(Employee employee) throws SQLException {
         try {
@@ -106,6 +114,48 @@ public class EmployeeRepository implements IEmployeeRepository {
 
         try {
             PreparedStatement preparedStatement = BaseRepository.connection.prepareStatement(SELECT_ALL_EMPLOYEES);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int employeeID = resultSet.getInt("employee_id");
+
+                String employeeName = resultSet.getString("employee_name");
+                Date dateOfBirth = resultSet.getDate("date_of_birth");
+                String identityNumber = resultSet.getString("identity_number");
+                double salary = resultSet.getDouble("salary");
+                String phoneNumber = resultSet.getString("phone_number");
+                String email = resultSet.getString("email");
+                String address = resultSet.getString("address");
+
+                String positionName = resultSet.getString("position_name");
+                Position position = new Position(positionName);
+
+                String qualificationName = resultSet.getString("qualification_name");
+                Qualification qualification = new Qualification(qualificationName);
+
+                String departmentName = resultSet.getString("department_name");
+                Department department = new Department(departmentName);
+
+                String userName = resultSet.getString("username");
+                User user = new User(userName);
+
+                employees.add(new Employee(employeeID,employeeName,dateOfBirth,identityNumber,salary,phoneNumber,email,address,position,qualification,department,user));
+            }
+        }
+        catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        return employees;
+    }
+
+    @Override
+    public List<Employee> searchEmployeeByElement(String element) {
+        List<Employee> employees = new ArrayList<>();
+
+        try {
+            PreparedStatement preparedStatement = BaseRepository.connection.prepareStatement(SEARCH_EMPLOYEE_BY_ELEMENT);
+            preparedStatement.setString(1,element);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

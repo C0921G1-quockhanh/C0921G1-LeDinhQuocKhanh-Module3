@@ -128,8 +128,24 @@ create table contract (
 		references service(service_id)
 );
 
+alter table contract
+drop foreign key contract_ibfk_2;
+
+alter table contract
+add constraint contract_customer_fk
+	foreign key(customer_id)
+		references customer(customer_id) on delete cascade;
+
+alter table contract
+drop foreign key contract_ibfk_1;
+
+alter table contract
+add constraint contract_employee_fk
+	foreign key (employee_id)
+		references employee(employee_id) on delete cascade;
+
 create table accompanied_service (
-	accompanied_service_id int primary key,
+	accompanied_service_id int auto_increment primary key,
     accompanied_service_name varchar(45),
     price double,
     unit varchar(10),
@@ -137,7 +153,7 @@ create table accompanied_service (
 );
 
 create table detail_contract (
-	detail_contract_id int primary key,
+	detail_contract_id int auto_increment primary key,
     contract_id int,
     accompanied_service_id int,
     quantity int,
@@ -147,3 +163,11 @@ create table detail_contract (
 	foreign key(accompanied_service_id)
 		references accompanied_service(accompanied_service_id)
 );
+
+alter table detail_contract
+drop foreign key detail_contract_ibfk_1;
+
+alter table detail_contract
+add constraint detail_contract_contract_fk
+	foreign key (contract_id)
+		references contract(contract_id) on delete cascade;

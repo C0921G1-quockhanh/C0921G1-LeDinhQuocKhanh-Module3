@@ -100,17 +100,35 @@
 
                             <div class="mb-3">
                                 <label for="startDate" class="form-label">Start Date: </label>
-                                <input type="text" class="form-control" id="startDate" name="startDate">
+                                <input type="text" class="form-control" id="startDate" name="startDate" value="<c:out value="${startString}"/>">
+
+                                <c:if test="${startDateWarningMsg != null}">
+                                    <p class="text-danger fw-bold">
+                                        <c:out value="${startDateWarningMsg}"/>
+                                    </p>
+                                </c:if>
                             </div>
 
                             <div class="mb-3">
                                 <label for="endDate" class="form-label">End Date: </label>
-                                <input type="text" class="form-control" id="endDate" name="endDate">
+                                <input type="text" class="form-control" id="endDate" name="endDate" value="<c:out value="${endString}"/>">
+
+                                <c:if test="${endDateWarningMsg != null}">
+                                    <p class="text-danger fw-bold">
+                                        <c:out value="${endDateWarningMsg}"/>
+                                    </p>
+                                </c:if>
                             </div>
 
                             <div class="mb-3">
                                 <label for="deposit" class="form-label">Deposit: </label>
-                                <input type="text" class="form-control" id="deposit" name="deposit">
+                                <input type="text" class="form-control" id="deposit" name="deposit" value="<c:out value="${contract.deposit}"/>">
+
+                                <c:if test="${depositWarningMsg != null}">
+                                    <p class="text-danger fw-bold">
+                                        <c:out value="${depositWarningMsg}"/>
+                                    </p>
+                                </c:if>
                             </div>
 
                             <div class="mb-3">
@@ -119,7 +137,7 @@
                                     <option></option>
 
                                     <c:forEach var="employee" items="${employees}">
-                                        <option value="${employee.employeeID}">${employee.employeeName}</option>
+                                        <option value="${employee.employeeID}" ${contract.employee.employeeID == employee.employeeID ? 'selected' : ''}>${employee.employeeName}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -130,7 +148,7 @@
                                     <option></option>
 
                                     <c:forEach var="customer" items="${customers}">
-                                        <option value="${customer.customerID}">${customer.customerName}</option>
+                                        <option value="${customer.customerID}" ${contract.customer.customerID == customer.customerID ? 'selected' : ''}>${customer.customerName}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -139,12 +157,12 @@
                                 <label for="serviceID" class="form-label">Service ID: </label>
                                 <select class="form-select" aria-label="default select example" id="serviceID" name="serviceID">
                                     <option></option>
-                                    <option value="1">Villa Beach Front</option>
-                                    <option value="2">House Princess 01</option>
-                                    <option value="3">Room Twin 01</option>
-                                    <option value="4">Villa No Beach Front</option>
-                                    <option value="5">House Princess 02</option>
-                                    <option value="6">Room Twin 02</option>
+                                    <option value="1" ${contract.service.serviceID == 1 ? 'selected' : ''}>Villa Beach Front</option>
+                                    <option value="2" ${contract.service.serviceID == 2 ? 'selected' : ''}>House Princess 01</option>
+                                    <option value="3" ${contract.service.serviceID == 3 ? 'selected' : ''}>Room Twin 01</option>
+                                    <option value="4" ${contract.service.serviceID == 4 ? 'selected' : ''}>Villa No Beach Front</option>
+                                    <option value="5" ${contract.service.serviceID == 5 ? 'selected' : ''}>House Princess 02</option>
+                                    <option value="6" ${contract.service.serviceID == 6 ? 'selected' : ''}>Room Twin 02</option>
                                 </select>
                             </div>
 

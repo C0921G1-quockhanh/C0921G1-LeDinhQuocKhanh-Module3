@@ -100,23 +100,35 @@
 
                             <div class="mb-3">
                                 <label for="serviceName" class="form-label">Service Name: </label>
-                                <input type="text" class="form-control" id="serviceName" name="serviceName">
+                                <input type="text" class="form-control" id="serviceName" name="serviceName" value="<c:out value="${service.serviceName}"/>">
                             </div>
 
                             <div class="mb-3">
                                 <label for="serviceArea" class="form-label">Service Area: </label>
-                                <input type="text" class="form-control" id="serviceArea" name="serviceArea">
+                                <input type="text" class="form-control" id="serviceArea" name="serviceArea" value="<c:out value="${service.serviceArea}"/>">
+
+                                <c:if test="${serviceAreaWarningMsg != null}">
+                                    <p class="text-danger fw-bold">
+                                        <c:out value="${serviceAreaWarningMsg}"/>
+                                    </p>
+                                </c:if>
                             </div>
 
 
                             <div class="mb-3">
                                 <label for="rentalCost" class="form-label">Rental Cost: </label>
-                                <input type="text" class="form-control" id="rentalCost" name="rentalCost">
+                                <input type="text" class="form-control" id="rentalCost" name="rentalCost" value="<c:out value="${service.rentalCost}"/>">
+
+                                <c:if test="${rentalCostWarningMsg != null}">
+                                    <p class="text-danger fw-bold">
+                                        <c:out value="${rentalCostWarningMsg}"/>
+                                    </p>
+                                </c:if>
                             </div>
 
                             <div class="mb-3">
                                 <label for="maxPeople" class="form-label">Max People: </label>
-                                <input type="text" class="form-control" id="maxPeople" name="maxPeople">
+                                <input type="text" class="form-control" id="maxPeople" name="maxPeople" value="<c:out value="${service.maxPeople}"/>">
                             </div>
 
                             <div class="mb-3">
@@ -124,10 +136,10 @@
 
                                 <select class="form-select" aria-label="default select example" id="rentalTypeID" name="rentalTypeID">
                                     <option></option>
-                                    <option value="1">Year</option>
-                                    <option value="2">Month</option>
-                                    <option value="3">Day</option>
-                                    <option value="4">Hour</option>
+                                    <option value="1" ${service.rentalType.rentalTypeID == 1 ? 'selected' : ''}>Year</option>
+                                    <option value="2" ${service.rentalType.rentalTypeID == 2 ? 'selected' : ''}>Month</option>
+                                    <option value="3" ${service.rentalType.rentalTypeID == 3 ? 'selected' : ''}>Day</option>
+                                    <option value="4" ${service.rentalType.rentalTypeID == 4 ? 'selected' : ''}>Hour</option>
                                 </select>
                             </div>
 
@@ -136,9 +148,9 @@
 
                                 <select class="form-select" aria-label="default select example" id="serviceTypeID" name="serviceTypeID">
                                     <option></option>
-                                    <option value="1">Villa</option>
-                                    <option value="2">House</option>
-                                    <option value="3">Room</option>
+                                    <option value="1" ${service.serviceType.serviceTypeID == 1 ? 'selected' : ''}>Villa</option>
+                                    <option value="2" ${service.serviceType.serviceTypeID == 2 ? 'selected' : ''}>House</option>
+                                    <option value="3" ${service.serviceType.serviceTypeID == 3 ? 'selected' : ''}>Room</option>
                                 </select>
                             </div>
 
@@ -147,8 +159,8 @@
 
                                 <select class="form-select" aria-label="default select example" id="roomStandard" name="roomStandard">
                                     <option></option>
-                                    <option value="Vip">Vip</option>
-                                    <option value="Normal">Normal</option>
+                                    <option value="Vip" ${service.roomStandard.equals('Vip') ? 'selected' : ''}>Vip</option>
+                                    <option value="Normal" ${service.roomStandard.equals('Normal') ? 'selected' : ''}>Normal</option>
                                 </select>
                             </div>
 
@@ -157,20 +169,33 @@
 
                                 <select class="form-select" aria-label="default select example" id="extraAmenity" name="extraAmenity">
                                     <option></option>
-                                    <option value="Swimming pool">Swimming pool</option>
-                                    <option value="Spa">Spa</option>
-                                    <option value="Fitness center">Fitness center</option>
+                                    <option value="Swimming pool" ${service.extraAmenity.equals('Swimming pool') ? 'selected' : ''}>Swimming pool</option>
+                                    <option value="Spa" ${service.extraAmenity.equals('Spa') ? 'selected' : ''}>Spa</option>
+                                    <option value="Fitness center" ${service.extraAmenity.equals('Fitness center') ? 'selected' : ''}>Fitness center</option>
                                 </select>
                             </div>
 
                             <div class="mb-3">
                                 <label for="poolArea" class="form-label">Pool Area: </label>
-                                <input type="text" class="form-control" id="poolArea" name="poolArea">
+                                <input type="text" class="form-control" id="poolArea" name="poolArea" value="<c:out value="${service.poolArea}"/>">
+
+                                <c:if test="${poolAreaWarningMsg != null}">
+                                    <p class="text-danger fw-bold">
+                                        <c:out value="${poolAreaWarningMsg}"/>
+                                    </p>
+                                </c:if>
                             </div>
 
                             <div class="mb-3">
                                 <label for="levels" class="form-label">Levels: </label>
-                                <input type="text" class="form-control" id="levels" name="levels">
+                                <input type="text" class="form-control" id="levels" name="levels" value="<c:out value="${service.levels}"/>">
+
+
+                                <c:if test="${levelWarningMsg != null}">
+                                    <p class="text-danger fw-bold">
+                                        <c:out value="${levelWarningMsg}"/>
+                                    </p>
+                                </c:if>
                             </div>
 
                             <button type="submit" class="btn btn-secondary">Add New Service</button>

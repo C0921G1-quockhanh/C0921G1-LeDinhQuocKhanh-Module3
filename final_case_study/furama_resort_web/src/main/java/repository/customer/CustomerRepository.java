@@ -29,6 +29,12 @@ public class CustomerRepository implements ICustomerRepository {
             "set customer_type_id = ?, customer_name = ?, date_of_birth = ?, sex = ?, identity_number = ?, phone_number = ?, email = ?, address = ?\n" +
             "where customer_id = ?";
 
+    private static final String SEARCH_CUSTOMER_BY_ELEMENT = "select C.customer_id,CT.customer_type_id, CT.customer_type_name, C.customer_name, C.date_of_birth, C.sex, C.identity_number, C.phone_number, C.email, C.address\n" +
+                                                    "from customer C\n" +
+                                                    "join customer_type CT on C.customer_type_id = CT.customer_type_id\n" +
+                                                    "where C.customer_name like concat('%',?,'%')\n" +
+                                                    "order by C.customer_id";
+
     @Override
     public void insertCustomer(Customer customer) throws SQLException {
         try {
@@ -88,6 +94,41 @@ public class CustomerRepository implements ICustomerRepository {
 
         try {
             PreparedStatement preparedStatement = BaseRepository.connection.prepareStatement(SELECT_ALL_CUSTOMERS);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int customerID = resultSet.getInt("customer_id");
+
+                int customerTypeID = resultSet.getInt("customer_type_id");
+                String customerTypeName = resultSet.getString("customer_type_name");
+
+                CustomerType customerType = new CustomerType(customerTypeID,customerTypeName);
+
+                String customerName = resultSet.getString("customer_name");
+                Date dateOfBirth = resultSet.getDate("date_of_birth");
+                Boolean sex = resultSet.getBoolean("sex");
+                String identityNumber = resultSet.getString("identity_number");
+                String phoneNumber = resultSet.getString("phone_number");
+                String email = resultSet.getString("email");
+                String address = resultSet.getString("address");
+
+                customers.add(new Customer(customerID,customerType,customerName,dateOfBirth,sex,identityNumber,phoneNumber,email,address));
+            }
+        }
+        catch (SQLException e) {
+            printSQLException(e);
+        }
+
+        return customers;
+    }
+
+    @Override
+    public List<Customer> searchCustomerByElement(String element) {
+        List<Customer> customers = new ArrayList<>();
+
+        try {
+            PreparedStatement preparedStatement = BaseRepository.connection.prepareStatement(SEARCH_CUSTOMER_BY_ELEMENT);
+            preparedStatement.setString(1,element);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

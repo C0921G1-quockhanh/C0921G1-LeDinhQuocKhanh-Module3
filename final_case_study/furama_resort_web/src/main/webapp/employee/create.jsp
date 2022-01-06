@@ -101,45 +101,76 @@
 
                             <div class="mb-3">
                                 <label for="employeeName" class="form-label">Employee Name: </label>
-                                <input type="text" class="form-control" id="employeeName" name="employeeName">
+                                <input type="text" class="form-control" id="employeeName" name="employeeName" value="<c:out value="${employee.employeeName}"/>">
                             </div>
 
                             <div class="mb-3">
                                 <label for="dateOfBirth" class="form-label">Date Of Birth: </label>
-                                <input type="text" class="form-control" id="dateOfBirth" name="dateOfBirth">
+                                <input type="text" class="form-control" id="dateOfBirth" name="dateOfBirth" placeholder="yyyy-MM-dd" value="<c:out value="${dateString}"/>">
+
+                                <c:if test="${birthdayWarningMsg != null}">
+                                    <p class="text-danger fw-bold">
+                                        <c:out value="${birthdayWarningMsg}"/>
+                                    </p>
+                                </c:if>
                             </div>
 
                             <div class="mb-3">
                                 <label for="identityNumber" class="form-label">Identity Number: </label>
-                                <input type="text" class="form-control" id="identityNumber" name="identityNumber">
+                                <input type="text" class="form-control" id="identityNumber" name="identityNumber" value="<c:out value="${employee.identityNumber}"/>">
+
+
+                                <c:if test="${identityNumberWarningMsg != null}">
+                                    <p class="text-danger fw-bold">
+                                        <c:out value="${identityNumberWarningMsg}"/>
+                                    </p>
+                                </c:if>
                             </div>
 
                             <div class="mb-3">
                                 <label for="salary" class="form-label">Salary: </label>
-                                <input type="text" class="form-control" id="salary" name="salary">
+                                <input type="text" class="form-control" id="salary" name="salary" value="<c:out value="${employee.salary}"/>">
+
+                                <c:if test="${salaryWarningMsg != null}">
+                                    <p class="text-danger fw-bold">
+                                        <c:out value="${salaryWarningMsg}"/>
+                                    </p>
+                                </c:if>
                             </div>
 
                             <div class="mb-3">
                                 <label for="phoneNumber" class="form-label">Phone Number: </label>
-                                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
+                                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" value="<c:out value="${employee.phoneNumber}"/>">
+
+                                <c:if test="${phoneNumberWarningMsg != null}">
+                                    <p class="text-danger fw-bold">
+                                        <c:out value="${phoneNumberWarningMsg}"/>
+                                    </p>
+                                </c:if>
                             </div>
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email: </label>
-                                <input type="text" class="form-control" id="email" name="email">
+                                <input type="text" class="form-control" id="email" name="email" value="<c:out value="${employee.email}"/>">
+
+                                <c:if test="${emailWarningMsg != null}">
+                                    <p class="text-danger fw-bold">
+                                        <c:out value="${emailWarningMsg}"/>
+                                    </p>
+                                </c:if>
                             </div>
 
                             <div class="mb-3">
                                 <label for="address" class="form-label">Address: </label>
-                                <input type="text" class="form-control" id="address" name="address">
+                                <input type="text" class="form-control" id="address" name="address" value="<c:out value="${employee.address}"/>">
                             </div>
 
                             <div class="mb-3">
                                 <label for="positionID" class="form-label">Position ID: </label>
                                 <select class="form-select" aria-label="default select example" id="positionID" name="positionID">
                                     <option></option>
-                                    <option value="1">Manager</option>
-                                    <option value="2">Service Staff</option>
+                                    <option value="1" ${employee.position.positionID == 1 ? 'selected' : ''}>Manager</option>
+                                    <option value="2" ${employee.position.positionID == 2 ? 'selected' : ''}>Service Staff</option>
                                 </select>
                             </div>
 
@@ -147,10 +178,10 @@
                                 <label for="qualificationID" class="form-label">Qualification ID: </label>
                                 <select class="form-select" aria-label="default select example" id="qualificationID" name="qualificationID">
                                     <option></option>
-                                    <option value="1">Intermediate</option>
-                                    <option value="2">College</option>
-                                    <option value="3">University</option>
-                                    <option value="4">Postgraduate</option>
+                                    <option value="1" ${employee.qualification.qualificationID == 1 ? 'selected' : ''}>Intermediate</option>
+                                    <option value="2" ${employee.qualification.qualificationID == 2 ? 'selected' : ''}>College</option>
+                                    <option value="3" ${employee.qualification.qualificationID == 3 ? 'selected' : ''}>University</option>
+                                    <option value="4" ${employee.qualification.qualificationID == 4 ? 'selected' : ''}>Postgraduate</option>
                                 </select>
                             </div>
 
@@ -158,16 +189,16 @@
                                 <label for="departmentID" class="form-label">Department ID: </label>
                                 <select class="form-select" aria-label="default select example" id="departmentID" name="departmentID">
                                     <option></option>
-                                    <option value="1">Sales-Marketing</option>
-                                    <option value="2">Administration</option>
-                                    <option value="3">Service</option>
-                                    <option value="4">Management</option>
+                                    <option value="1" ${employee.department.departmentID == 1 ? 'selected' : ''}>Sales-Marketing</option>
+                                    <option value="2" ${employee.department.departmentID == 2 ? 'selected' : ''}>Administration</option>
+                                    <option value="3" ${employee.department.departmentID == 3 ? 'selected' : ''}>Service</option>
+                                    <option value="4" ${employee.department.departmentID == 4 ? 'selected' : ''}>Management</option>
                                 </select>
                             </div>
 
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username: </label>
-                                <input type="text" class="form-control" id="username" name="username">
+                                <input type="text" class="form-control" id="username" name="username" value="<c:out value="${employee.user.userName}"/>">
                             </div>
 
                             <button type="submit" class="btn btn-secondary">Add New Employee</button>
